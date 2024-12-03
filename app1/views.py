@@ -9,8 +9,8 @@ from django.conf import settings
 from django.contrib import messages
 # Create your views here.
 
-def home_page(request):
-    return render(request, 'home.html')
+def index_page(request):
+    return render(request, 'index.html')
 
 
 
