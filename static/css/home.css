@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Grandstander", cursive;
+  background-color: whitesmoke;
+}
+
+.nav-link {
+  font-family: "Grandstander", cursive;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  word-spacing: 5px;
+  color: #264653;
+  margin-top: 5px;
+  margin-left: 25px;
+  position: relative; /* Add relative positioning for the pseudo-element */
+  transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.navbar-nav {
+  justify-content: center;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #e76f51;
+  transition: width 0.3s ease; /* Smooth transition for underline width */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #e76f51 !important;
+  opacity: 1;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%; /* Expand the underline to full width on hover or focus */
+}
+
+.btn {
+  border-color: #264653;
+  border-radius: 200px;
+  color: #264653;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #e76f51;
+}
+
+/* starting slogan */
+.slogan1 {
+  font-family: "Grandstander", cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  color: #e76f51;
+}
+
+/* starting images slider */
+.image1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+/* starting images slider sizing*/
+.image1 img {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+}
+
+/* second slogan */
+.slogan2 {
+  font-family: "Grandstander", cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  color: #264653;
+}
+
+/* second images slider */
+.image2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* second images slider sizing*/
+.image2 img {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+}
+
+.slogan3 {
+  font-family: "Grandstander", cursive;
+  font-size: 1.3rem;
+  font-weight: light;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  font-weight: bold;
+  color: #e76f51;
+}
+
+.features {
+  display: flex;
+}
+
+.features img {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}

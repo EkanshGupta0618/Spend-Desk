@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #0a2647, #144272);
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 450px;
+}
+
+h2 {
+  color: #0a2647;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.otp-field {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+}
+
+.otp-field input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  border: 2px solid #2c74b3;
+  border-radius: 8px;
+  background: transparent;
+  color: #0a2647;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.otp-field input:focus {
+  border-color: #144272;
+  box-shadow: 0 0 8px rgba(44, 116, 179, 0.3);
+  transform: scale(1.05);
+}
+
+.verify-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2c74b3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.verify-btn:hover {
+  background: #144272;
+}
+
+.resend {
+  text-align: center;
+  margin-top: 15px;
+  color: #666;
+}
+
+.resend a {
+  color: #2c74b3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
+
+  .otp-field input {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+}

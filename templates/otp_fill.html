@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Page</title>
+</head>
+<body>
+    <form action="{% url 'otp_fill' %}" method="post">
+    {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spend Desk - OTP Verification</title>
+    <link rel="stylesheet" href="/static/css/otp_fill.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Spend Desk Verification</h2>
+        <p style="text-align: center; color: #666;">Please enter the OTP sent to your registered email</p>
+        
+        <div class="otp-field">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 0)">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 1)">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 2)">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 3)">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 4)">
+            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 5)">
+        </div>
+
+        <button class="verify-btn">Verify OTP</a></button>
+        
+        <div class="resend">
+            Didn't receive code? <a href="#">Resend OTP</a>
+        </div>
+    </div>
+
+    <script>
+        function moveToNext(input, index) {
+            if (input.value.length === 1) {
+                if (index < 5) {
+                    input.nextElementSibling.focus();
+                }
+            } else if (input.value.length === 0 && index > 0) {
+                input.previousElementSibling.focus();
+            }
+        }
+    </script>
+</body>
+</html>
+
+    </form>
+</body>
+</html>

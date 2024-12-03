@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+
+<body>
+
+    <div class="signup-container d-flex justify-content-center align-items-center">
+        <h2>Sign Up</h2>
+        <form method="POST" onsubmit="return valdidate()">
+            {% csrf_token %}
+
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username" placeholder="Enter your Name" required>
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required minlength="6">
+
+            <label for="password">Confirm Password</label>
+            <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required minlength="6">
+            <!-- <error id="alert"></error> -->
+            {% for message in messages %}
+
+            {% if message.tags == 'error' %}
+            <p style="color: red;">{{message}}</p>
+            {% elif meesaage.tags == 'info'%}
+            <script>
+                window.onload = function () {
+                    alert("{{message}}");
+                }
+            </script>
+            {% endif %}
+            {% endfor %}
+
+
+            <button type="submit">Sign Up</button>
+            <div class="form-footer">
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
