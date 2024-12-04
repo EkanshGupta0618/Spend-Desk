@@ -31,7 +31,5 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name='forgot_password'),  # ForgotPassword to forgot_password
     path('otp_fill/', views.otp_fill, name='otp_fill'),     # OTP_Fill to otp_fill
     path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard to dashboard
-    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),  # Media URL
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  # Static URL
 ]
 
