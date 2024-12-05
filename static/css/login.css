@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Grandstander", serif;
   background-color: #e6e6fa;
   display: flex;
   justify-content: center;
@@ -43,32 +45,13 @@ button {
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 10px;
+  font-family: "Grandstander", serif;
 }
 
 button:hover {
   background-color: #22577a;
 }
 
-.google-login {
-  background-color: white;
-  color: #22577a;
-  border: 0px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.google-login:hover {
-  background-color: #f8f8f8;
-}
-
-.google-logo {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-}
 
 .forgot-password {
   display: block;
