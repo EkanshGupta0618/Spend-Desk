@@ -49,27 +49,6 @@ button:hover {
   background-color: #22577a;
 }
 
-.google-login {
-  background-color: white;
-  color: #22577a;
-  border: 0px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.google-login:hover {
-  background-color: #f8f8f8;
-}
-
-.google-logo {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-}
-
 .forgot-password {
   display: block;
   margin-top: 10px;
