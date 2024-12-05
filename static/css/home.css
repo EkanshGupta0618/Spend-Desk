@@ -133,3 +133,7 @@ body {
   align-items: center;
   margin: 10px;
 }
+
+.features-images{
+  width: 250px;
+}
