@@ -19,9 +19,16 @@ body {
   z-index: 2;
 }
 
+h1 {
+  text-align: center;
+  color: #2A9D8F;
+  font-size: 44px;
+}
+
 h2 {
   text-align: center;
-  color: #22577a;
+  color: #2A9D8F;
+  font-size: 30px;
 }
 
 input[type="text"],
@@ -37,7 +44,7 @@ input[type="password"] {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #22577a;
+  background-color: #2A9D8F;
   color: white;
   border: none;
   border-radius: 8px;
@@ -49,26 +56,6 @@ button:hover {
   background-color: #22577a;
 }
 
-.google-signup {
-  background-color: white;
-  color: #22577a;
-  border: 0px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.google-signup:hover {
-  background-color: #f8f8f8;
-}
-
-.google-logo {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-}
 
 .form-footer {
   text-align: center;
@@ -76,11 +63,12 @@ button:hover {
 }
 
 .form-footer a {
-  color: #22577a;
+  color: #2A9D8F;
   text-decoration: none;
 }
 
 .form-footer a:hover {
   text-decoration: underline;
+  color: #22577a;
 }
 
