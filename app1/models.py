@@ -12,3 +12,6 @@ class PasswordResetOTP(models.Model):
 
     def is_expired(self):
         return now() > self.created_at + timedelta(minutes=10)
+
+    def __str__(self):
+        return f"OTP for {self.user.email} - {self.otp}"
