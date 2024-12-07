@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/signup.css">
+    <link rel="stylesheet" href="/static/css/sign_up.css">
     <title>Spend-Desk Signup Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,29 +13,26 @@
         rel="stylesheet">
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="font-family: Grandstander,cursive" ;>
-    <div class="container d-flex justify-content-center align-items-center">
+<body class="display-container justify-content-center align-items-center flex-column vh-100">
+    <div class="container ">
         <h1>SPEND-DESK</h1>
-        <div class="signup-container d-flex justify-content-center align-items-center">
+        <div class="signup-container">
             <h2>Sign Up</h2>
             <form method="POST" onsubmit="return valdidate()">
                 {% csrf_token %}
 
                 <label for="username">Name</label>
-                <input type="text" id="username" name="username" placeholder="Enter your Name" required
-                    style="font-family: Grandstander,cursive" ;>
+                <input type="text" id="username" name="username" placeholder="Enter your Name" required>
 
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Enter your email" required
-                    style="font-family: Grandstander,cursive" ;>
+                <input type="text" id="email" name="email" placeholder="Enter your email" required>
 
                 <label for="password">Password</label>
-                <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required minlength="6"
-                    style="font-family: Grandstander,cursive" ;>
+                <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required minlength="6">
 
                 <label for="password">Confirm Password</label>
                 <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required
-                    minlength="6" style="font-family: Grandstander,cursive" ;>
+                    minlength="6">
 
                 <!-- <error id="alert"></error> -->
                 <div class="error-message">
