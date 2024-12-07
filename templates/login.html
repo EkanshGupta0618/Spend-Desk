@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/login_page.css">
     <title>Spend-Desk Login Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,20 +13,18 @@
         rel="stylesheet" />
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="font-family: Grandstander,cursive" ;>
-    <div class="header" style="font-family: Grandstander,cursive" ;>
+<body class="d-flex flex-column min-vh-100">
+    <div class="header">
         <h1>SPEND-DESK</h1>
-        <div class="login-container" style="font-family: Grandstander,cursive" ;>
+        <div class="login-container">
             <h2>Login</h2>
             <form method="POST">
                 {% csrf_token %}
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter Your Username" required
-                    style="font-family: Grandstander,cursive" ;>
+                <input type="text" id="username" name="username" placeholder="Enter Your Username" required>
 
                 <label for="password">Password</label>
-                <input type="password" id="password" name="pass" placeholder="Enter your password" required
-                    style="font-family: Grandstander,cursive" ;>
+                <input type="password" id="password" name="pass" placeholder="Enter your password" required>
 
                 <!-- error messages -->
                 <div class="error-message">
@@ -46,11 +44,11 @@
                 <!-- submit button -->
                 <button type="submit">Login</button>
 
-                <div class="forgot-password" style="font-family: Grandstander,cursive" ;>
+                <div class="forgot-password">
                     <a href="{% url 'forgot_password' %}">Forgot Password?</a>
                 </div>
 
-                <div class="form-footer" style="font-family: Grandstander,cursive" ;>
+                <div class="form-footer">
                     <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
                 </div>
             </form>

@@ -1,6 +1,6 @@
 body {
-  font-family: 'Roboto', sans-serif;
   background-color: #e6e6fa;
+  font-family: "Grandstander", "cursive";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +20,9 @@ body {
 }
 
 h1 {
-    text-align: center;
-    color: #e76f51;
-    font-size: 44px;
+  text-align: center;
+  color: #e76f51;
+  font-size: 44px;
 }
 
 h2 {
@@ -33,6 +33,7 @@ h2 {
 
 input[type="text"],
 input[type="password"] {
+  font-family: "Grandstander", "cursive";
   width: 100%;
   padding: 12px;
   margin: 12px 0;
@@ -56,7 +57,6 @@ button {
 button:hover {
   background-color: #22577a;
 }
-
 
 .forgot-password {
   display: block;

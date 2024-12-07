@@ -1,56 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Page</title>
-</head>
-<body>
-    <form action="{% url 'otp_fill' %}" method="post">
-    {% csrf_token %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spend Desk - OTP Verification</title>
-    <link rel="stylesheet" href="/static/css/otp_fill.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Spend Desk Verification</h2>
-        <p style="text-align: center; color: #666;">Please enter the OTP sent to your registered email</p>
-        
-        <div class="otp-field">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 0)">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 1)">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 2)">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 3)">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 4)">
-            <input type="text" maxlength="1" pattern="[0-9]" oninput="moveToNext(this, 5)">
-        </div>
 
-        <button class="verify-btn">Verify OTP</a></button>
-        
-        <div class="resend">
-            Didn't receive code? <a href="#">Resend OTP</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/otpfill.css">
+    <!-- Custom JavaScript -->
+     <script src="/static/js/otp.js"></script>
+</head>
+
+<body class="container d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
+    <div class="otp-card bg-white p-4 rounded ">
+        <h2 class="text-center mb-3">Spend-Desk OTP Verification</h2>
+        <p class="text-center text-muted">Enter the OTP sent to your email address</p>
+        <div class="otp-input d-flex justify-content-center gap-2 mb-3">
+            <input type="text" maxlength="1" class="form-control text-center" autofocus>
+            <input type="text" maxlength="1" class="form-control text-center">
+            <input type="text" maxlength="1" class="form-control text-center">
+            <input type="text" maxlength="1" class="form-control text-center">
+            <input type="text" maxlength="1" class="form-control text-center">
+            <input type="text" maxlength="1" class="form-control text-center">
         </div>
+        <p class="text-center">Didn't get the OTP? <a href="#" id="resend-link" class="text-decoration-underline">Resend
+                OTP</a></p>
+        <button class="btn btn-primary w-100 mt-3" id="verify-btn" disabled>Verify now</button>
     </div>
 
-    <script>
-        function moveToNext(input, index) {
-            if (input.value.length === 1) {
-                if (index < 5) {
-                    input.nextElementSibling.focus();
-                }
-            } else if (input.value.length === 0 && index > 0) {
-                input.previousElementSibling.focus();
-            }
-        }
-    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
-    </form>
-</body>
 </html>
