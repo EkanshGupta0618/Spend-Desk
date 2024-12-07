@@ -16,24 +16,28 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/otpfill.css">
     <!-- Custom JavaScript -->
-     <script src="/static/js/otp.js"></script>
+    <script src="/static/js/otp.js"></script>
 </head>
 
 <body class="container d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
     <div class="otp-card bg-white p-4 rounded ">
         <h2 class="text-center mb-3">Spend-Desk OTP Verification</h2>
         <p class="text-center text-muted">Enter the OTP sent to your email address</p>
-        <div class="otp-input d-flex justify-content-center gap-2 mb-3">
-            <input type="text" maxlength="1" class="form-control text-center" autofocus>
-            <input type="text" maxlength="1" class="form-control text-center">
-            <input type="text" maxlength="1" class="form-control text-center">
-            <input type="text" maxlength="1" class="form-control text-center">
-            <input type="text" maxlength="1" class="form-control text-center">
-            <input type="text" maxlength="1" class="form-control text-center">
-        </div>
-        <p class="text-center">Didn't get the OTP? <a href="#" id="resend-link" class="text-decoration-underline">Resend
-                OTP</a></p>
-        <button class="btn btn-primary w-100 mt-3" id="verify-btn" disabled>Verify now</button>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="otp-input d-flex justify-content-center gap-2 mb-3">
+                <input name="otp" type="text" maxlength="1" class="form-control text-center" autofocus>
+                <input name="otp" type="text" maxlength="1" class="form-control text-center">
+                <input name="otp" type="text" maxlength="1" class="form-control text-center">
+                <input name="otp" type="text" maxlength="1" class="form-control text-center">
+                <input name="otp" type="text" maxlength="1" class="form-control text-center">
+                <input name="otp" type="text" maxlength="1" class="form-control text-center">
+            </div>
+            <p class="text-center">Didn't get the OTP? <a href="#" id="resend-link"
+                    class="text-decoration-underline">Resend
+                    OTP</a></p>
+            <button class="btn btn-primary w-100 mt-3" id="verify-btn" disabled>Verify now</button>
+        </form>
     </div>
 
     <!-- Bootstrap JS -->
