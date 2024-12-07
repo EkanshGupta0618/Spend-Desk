@@ -33,6 +33,7 @@ h2 {
 
 input[type="text"],
 input[type="password"] {
+  font-family: "Grandstander", "cursive";
   width: 100%;
   padding: 12px;
   margin: 12px 0;
@@ -42,6 +43,7 @@ input[type="password"] {
 }
 
 button {
+  font-family: "Grandstander", "cursive";
   width: 100%;
   padding: 12px;
   background-color: #2A9D8F;
