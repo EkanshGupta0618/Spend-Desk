@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spend-Desk Signup Page</title>
     <link rel="stylesheet" href="/static/css/signup.css">
+    <title>Spend-Desk Signup Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,36 +16,49 @@
 <body class="d-flex flex-column min-vh-100" style="font-family: Grandstander,cursive" ;>
     <div class="container d-flex justify-content-center align-items-center">
         <h1>SPEND-DESK</h1>
-    <div class="signup-container d-flex justify-content-center align-items-center">
-        <h2>Sign Up</h2>
-        <form method="POST" onsubmit="return valdidate()">
-            {% csrf_token %}
+        <div class="signup-container d-flex justify-content-center align-items-center">
+            <h2>Sign Up</h2>
+            <form method="POST" onsubmit="return valdidate()">
+                {% csrf_token %}
 
-            <label for="username">Name</label>
-            <input type="text" id="username" name="username" placeholder="Enter your Name" required
-                style="font-family: Grandstander,cursive" ;>
+                <label for="username">Name</label>
+                <input type="text" id="username" name="username" placeholder="Enter your Name" required
+                    style="font-family: Grandstander,cursive" ;>
 
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Enter your email" required
-                style="font-family: Grandstander,cursive" ;>
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Enter your email" required
+                    style="font-family: Grandstander,cursive" ;>
 
-            <label for="password">Password</label>
-            <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required minlength="6"
-                style="font-family: Grandstander,cursive" ;>
+                <label for="password">Password</label>
+                <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required minlength="6"
+                    style="font-family: Grandstander,cursive" ;>
 
-            <label for="password">Confirm Password</label>
-            <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required minlength="6"
-                style="font-family: Grandstander,cursive" ;>
-            <!-- <error id="alert"></error> -->
+                <label for="password">Confirm Password</label>
+                <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required
+                    minlength="6" style="font-family: Grandstander,cursive" ;>
 
+                <!-- <error id="alert"></error> -->
+                <div class="error-message">
+                    {% for message in messages %}
 
+                    {% if message.tags == 'error' %}
+                    <p>{{message}}</p>
+                    {% elif meesaage.tags == 'info'%}
+                    <script>
+                        window.onload = function () {
+                            alert("{{message}}");
+                        }
+                    </script>
+                    {% endif %}
+                    {% endfor %}
+                </div>
 
-            <button type="submit" style="font-family: Grandstander,cursive" ;>Sign Up</button>
-            <div class="form-footer">
-                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
-            </div>
-        </form>
-    </div>
+                <button type="submit">Sign Up</button>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                </div>
+            </form>
+        </div>
 </body>
 
 </html>
