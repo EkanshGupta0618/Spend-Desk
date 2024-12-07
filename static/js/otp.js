@@ -35,18 +35,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  // Resend OTP (dummy functionality)
-  document.getElementById("resend-link").addEventListener("click", (e) => {
-    e.preventDefault();
-    alert("OTP has been resent!");
-  });
-
-  // Verify OTP (dummy functionality)
-  verifyBtn.addEventListener("click", () => {
-    const otpValue = Array.from(inputs)
-      .map((input) => input.value)
-      .join("");
-    alert(`Verifying OTP: ${otpValue}`);
-  });
 });
