@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+import random
 # Create your views here.
 
 def home_page(request):
@@ -59,20 +60,66 @@ def sign_up_page(request):
     return render(request, 'signup.html')
 
 
-def forgot_password(request): 
+def forgot_password(request):
     if request.method == 'POST':
-        # Get the post data
         email = request.POST.get('email')
-        print ("Email: ", email)
         if User.objects.filter(email=email).exists():
-            print('Email exists')
-            
-        return render(request, 'forgot_password.html')
+            user = User.objects.get(email=email)
+            otp = str(random.randint(100000, 999999))
+            request.session['otp'] = otp
+            request.session['email'] = email
+            send_mail(
+                'OTP for password reset',
+                f'Your OTP for resetting your password is: {otp}',
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+            )
+            return redirect('otp_fill')
+        else:
+            messages.error(request, 'Email does not exist')
+            return redirect('forgot_password')
     return render(request, 'forgot_password.html')
 
 
 def otp_fill(request):
-    return render (request, 'otp_fill.html')
+    if request.method == 'POST':
+        entered_otp = ''.join(request.POST.getlist('otp'))  # Collect the OTP input values
+        session_otp = request.session.get('otp')
+        
+        if entered_otp == session_otp:
+            return redirect('password_reset')  # Redirect to password reset page
+        else:
+            error = "Invalid OTP. Please try again."
+            return render(request, 'otp_fill.html', {'error': error})
+    return render(request, 'otp_fill.html')
+
+
+
+
+
+
+
+def password_reset(request):
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        if new_password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'password_reset.html')
+        
+        email = request.session.get('email')
+        user = User.objects.get(email=email)
+        user.set_password(new_password)
+        user.save()
+        messages.success(request, 'Password reset successfully.')
+        return redirect('login')  # Redirect to login page after successful reset
+    
+    return render(request, 'password_reset.html')
+
+
+
+
 
 
 @login_required(login_url='login')

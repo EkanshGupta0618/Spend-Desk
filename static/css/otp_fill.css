@@ -77,3 +77,12 @@ p{
     border-radius: 15px;
     cursor: not-allowed;
 }
+
+.error-message {
+    color: red;
+    font-size: 16px;
+    text-align: center;
+    padding: 2%;
+    margin: 0%;
+    text-decoration: none;
+  }

@@ -23,11 +23,12 @@ from app1 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.sign_up_page, name='signup'),           # SignUpPage to sign_up_page
-    path('login/', views.login_page, name='login'),         # LoginPage to login_page
-    path('home/', views.home_page, name='home'),            # HomePage to home_page
-    path('forgot_password/', views.forgot_password, name='forgot_password'),  # ForgotPassword to forgot_password
-    path('otp_fill/', views.otp_fill, name='otp_fill'),     # OTP_Fill to otp_fill
-    path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard to dashboard
+    path('', views.sign_up_page, name='signup'),                                # SignUpPage to sign_up_page
+    path('login/', views.login_page, name='login'),                             # LoginPage to login_page
+    path('home/', views.home_page, name='home'),                                # HomePage to home_page
+    path('forgot_password/', views.forgot_password, name='forgot_password'),    # ForgotPassword to forgot_password
+    path('otp_fill/', views.otp_fill, name='otp_fill'),                         # OTP_Fill to otp_fill
+    path('dashboard/', views.dashboard, name='dashboard'),                      # Dashboard to dashboard
+    path('password_reset/', views.password_reset, name='password_reset'),       # PasswordReset 
 ]
 
