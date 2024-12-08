@@ -1,17 +1,34 @@
-import random
-from django.contrib.auth.models import User
 from django.db import models
-from django.utils.timezone import now
-from datetime import timedelta
 
-class PasswordResetOTP(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    otp = models.CharField(max_length=6)
-    created_at = models.DateTimeField(auto_now_add=True)
-    is_used = models.BooleanField(default=False)
 
-    def is_expired(self):
-        return now() > self.created_at + timedelta(minutes=10)
+
+class UserProfile(models.Model):
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
+    username = models.CharField(max_length=20, unique=True)
+    email = models.EmailField(unique=True)
+    profile_pic = models.ImageField(upload_to='Media/user_profile',null=True)
+    password = models.CharField(max_length=25)
+    otp = models.CharField(max_length=25,default='0000')
+    status = models.BooleanField(default=False)
+
+    @staticmethod
+    def get_user_by_username(username):
+        try:
+            return UserProfile.objects.get(username=username)
+        except:
+            return False
+
+
+    def isExists(self):
+        if UserProfile.objects.filter(username = self.username):
+            return True
+        return False
+
+    def register(self):
+        self.save()
+
 
     def __str__(self):
-        return f"OTP for {self.user.email} - {self.otp}"
+        return f"{self.first_name}"
+
