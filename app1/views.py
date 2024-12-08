@@ -101,20 +101,6 @@ def otp_fill(request):
 
 
 def password_reset(request):
-    if request.method == 'POST':
-        new_password = request.POST.get('new_password')
-        confirm_password = request.POST.get('confirm_password')
-        if new_password != confirm_password:
-            messages.error(request, 'Passwords do not match.')
-            return render(request, 'password_reset.html')
-        
-        email = request.session.get('email')
-        user = User.objects.get(email=email)
-        user.set_password(new_password)
-        user.save()
-        messages.success(request, 'Password reset successfully.')
-        return redirect('login')  # Redirect to login page after successful reset
-    
     return render(request, 'password_reset.html')
 
 
