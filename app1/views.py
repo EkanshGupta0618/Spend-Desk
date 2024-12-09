@@ -101,10 +101,11 @@ def otp_fill(request):
 
 
 def password_reset(request):
-    return render(request, 'password_reset.html')
-
-
-
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        print(new_password, confirm_password)
+    return HttpResponse('Password reset successful')
 
 
 
