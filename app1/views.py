@@ -8,13 +8,21 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 import random
-# Create your views here.
+from datetime import datetime
+import pytz
 
+# Create your views here.
+# ============================Home Page=========================================
 def home_page(request):
     return render(request, 'home.html')
 
 
 
+
+
+
+
+# ============================Login Page=========================================
 #For login page of the website
 def login_page(request):
     if request.method == 'POST':
@@ -29,10 +37,11 @@ def login_page(request):
             #return HttpResponse('Invalid Credentials')
             messages.error(request, 'Invalid Username or Password')
     return render(request, 'login.html')
+# ===============================================================================
 
 
 
-
+# ============================Signup Page=========================================
 #For signup page of the website
 def sign_up_page(request):
     if request.method == 'POST':
@@ -58,8 +67,11 @@ def sign_up_page(request):
             my_user.save()
             return redirect('login')  
     return render(request, 'signup.html')
+# ===============================================================================
 
 
+
+# ============================Forgot_Password Page==================================
 def forgot_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -80,8 +92,11 @@ def forgot_password(request):
             messages.error(request, 'Email does not exist')
             return redirect('forgot_password')
     return render(request, 'forgot_password.html')
+# ===============================================================================
 
 
+
+# ============================OTP Fill Page=========================================
 def otp_fill(request):
     if request.method == 'POST':
         entered_otp = ''.join(request.POST.getlist('otp'))  # Collect the OTP input values
@@ -93,22 +108,37 @@ def otp_fill(request):
             error = "Invalid OTP. Please try again."
             return render(request, 'otp_fill.html', {'error': error})
     return render(request, 'otp_fill.html')
+# ===============================================================================
 
 
 
-
-
-
-
+# ============================Password Reset Page=========================================
 def password_reset(request):
     if request.method == 'POST':
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
-        print(new_password, confirm_password)
-    return HttpResponse('Password reset successful')
+        if new_password == confirm_password:
+            email = request.session.get('email')
+            user = User.objects.get(email=email)
+            user.set_password(new_password)
+            user.save()
+            send_mail(
+                'Spend-Desk Password Reset',
+                f'Your password has been reset successfully at: {datetime.now()}. If you did not perform this action, please contact us immediately.',
+                settings.EMAIL_HOST_USER,
+                [email],
+                fail_silently=False,
+            )
+            return redirect('login')
+        else:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'password_reset.html')
+    return render(request, 'password_reset.html')
 
 
 
+
+# ============================Dashboard Page=========================================
 @login_required(login_url='login')
 def dashboard(request):
     return render(request, 'dashboard.html')
