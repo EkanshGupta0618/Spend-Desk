@@ -36,10 +36,10 @@ function updateStats() {
 
   document.getElementById(
     "total-expenses"
-  ).textContent = `$${totalExpenses.toFixed(2)}`;
+  ).textContent = `Rs. ${totalExpenses.toFixed(2)}`;
   document.getElementById(
     "remaining-budget"
-  ).textContent = `$${remainingBudget.toFixed(2)}`;
+  ).textContent = `Rs. ${remainingBudget.toFixed(2)}`;
 
   // Update chart data
   const categoryTotals = {
@@ -75,7 +75,7 @@ function displayExpenses() {
                 <p>${expense.category} - ${expense.date}</p>
             </div>
             <div class="expense-actions">
-                <span class="expense-amount">$${expense.amount.toFixed(
+                <span class="expense-amount">Rs. ${expense.amount.toFixed(
                   2
                 )}</span>
                 <button class="btn edit-btn" onclick="editExpense(${index})">Edit</button>
@@ -125,7 +125,7 @@ function setMonthlyBudget() {
     localStorage.setItem("monthlyBudget", newBudget);
     monthlyBudget = newBudget;
     updateStats();
-    alert(`Monthly budget updated to $${newBudget.toFixed(2)}`);
+    alert(`Monthly budget updated to Rs. ${newBudget.toFixed(2)}`);
   } else {
     alert("Invalid budget value. Please try again.");
   }
