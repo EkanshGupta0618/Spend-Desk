@@ -14,14 +14,21 @@ import pytz
 # Create your views here.
 # ============================Home Page=========================================
 def home_page(request):
-    return render(request, 'home.html')
-
-
-
-
-
-
-
+    if request.method == 'POST':
+        # Get the post data
+        uname = request.POST.get('username')
+        emaill = request.POST.get('email')
+        message = request.POST.get('message')
+        # send mail to the admin
+        send_mail(
+            f'Form submition from {uname}',
+            f'Message is: {message}\nEmail: {emaill}',
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
+        return render(request, 'home.html')
+# ===============================================================================
 # ============================Login Page=========================================
 #For login page of the website
 def login_page(request):
@@ -38,9 +45,6 @@ def login_page(request):
             messages.error(request, 'Invalid Username or Password')
     return render(request, 'login.html')
 # ===============================================================================
-
-
-
 # ============================Signup Page=========================================
 #For signup page of the website
 def sign_up_page(request):
@@ -68,9 +72,6 @@ def sign_up_page(request):
             return redirect('login')  
     return render(request, 'signup.html')
 # ===============================================================================
-
-
-
 # ============================Forgot_Password Page==================================
 def forgot_password(request):
     if request.method == 'POST':
@@ -92,10 +93,7 @@ def forgot_password(request):
             messages.error(request, 'Email does not exist')
             return redirect('forgot_password')
     return render(request, 'forgot_password.html')
-# ===============================================================================
-
-
-
+# ==================================================================================
 # ============================OTP Fill Page=========================================
 def otp_fill(request):
     if request.method == 'POST':
@@ -108,10 +106,7 @@ def otp_fill(request):
             error = "Invalid OTP. Please try again."
             return render(request, 'otp_fill.html', {'error': error})
     return render(request, 'otp_fill.html')
-# ===============================================================================
-
-
-
+# =================================================================================
 # ============================Password Reset Page=========================================
 def password_reset(request):
     if request.method == 'POST':
@@ -134,10 +129,7 @@ def password_reset(request):
             messages.error(request, 'Passwords do not match')
             return render(request, 'password_reset.html')
     return render(request, 'password_reset.html')
-
-
-
-
+# ===================================================================================
 # ============================Dashboard Page=========================================
 @login_required(login_url='login')
 def dashboard(request):
