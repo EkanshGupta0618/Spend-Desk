@@ -1,7 +1,4 @@
 from django.db import models
-
-
-
 class UserProfile(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
@@ -9,9 +6,8 @@ class UserProfile(models.Model):
     email = models.EmailField(unique=True)
     profile_pic = models.ImageField(upload_to='Media/user_profile',null=True)
     password = models.CharField(max_length=25)
-    otp = models.CharField(max_length=25,default='0000')
+    otp = models.CharField(max_length=25,default='000000')
     status = models.BooleanField(default=False)
-
     @staticmethod
     def get_user_by_username(username):
         try:
@@ -31,3 +27,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.first_name}"
+
+class Budget(models.Model):
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Expense(models.Model):
+    description = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)

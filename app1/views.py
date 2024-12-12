@@ -10,7 +10,10 @@ from django.contrib import messages
 import random
 from datetime import datetime
 import pytz
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Expense, Budget
+import json
 # Create your views here.
 # ============================Home Page=========================================
 def home_page(request):
@@ -133,4 +136,37 @@ def password_reset(request):
 # ============================Dashboard Page=========================================
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    # Fetch the current budget and expenses for the dashboard
+    current_budget = Budget.objects.first()  # Assuming only one budget is set
+    expenses = Expense.objects.all()
+    return render(request, 'dashboard.html', {
+        'current_budget': current_budget,
+        'expenses': expenses
+    })
+
+@csrf_exempt
+def set_budget(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        budget_amount = data.get('budget')
+        Budget.objects.update_or_create(id=1, defaults={'amount': budget_amount})  # Update or create budget
+        return JsonResponse({'status': 'success', 'budget': budget_amount})
+
+@csrf_exempt
+def add_expense(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        description = data.get('description')
+        amount = data.get('amount')
+        category = data.get('category')
+        expense = Expense.objects.create(description=description, amount=amount, category=category)
+        return JsonResponse({'status': 'success', 'expense': {
+            'id': expense.id,
+            'description': expense.description,
+            'amount': expense.amount,
+            'category': expense.category
+        }})
+
+def get_expenses(request):
+    expenses = Expense.objects.all().values()
+    return JsonResponse(list(expenses), safe=False)
