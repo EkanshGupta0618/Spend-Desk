@@ -20,6 +20,7 @@ from app1 import views
 from django.contrib.auth.views import LogoutView
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.sign_up_page, name='signup'),                                # SignUpPage to sign_up_page
@@ -35,4 +36,3 @@ urlpatterns = [
     path('edit_expense/<int:expense_id>/', views.edit_expense, name='edit_expense'),
     path('delete_expense/<int:expense_id>/', views.delete_expense, name='delete_expense'),
 ]
-
