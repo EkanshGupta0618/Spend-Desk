@@ -20,7 +20,6 @@ from app1 import views
 from django.contrib.auth.views import LogoutView
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.sign_up_page, name='signup'),                                # SignUpPage to sign_up_page
