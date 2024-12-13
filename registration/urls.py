@@ -33,5 +33,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),                      # Dashboard to dashboard
     path('set_budget/', views.set_budget, name='set_budget'),                   # SetBudget to set_budget
     path('add_expense/', views.add_expense, name='add_expense'),                # AddExpense
+    path('edit_expense/<int:expense_id>/', views.edit_expense, name='edit_expense'),
+    path('delete_expense/<int:expense_id>/', views.delete_expense, name='delete_expense'),
 ]
 

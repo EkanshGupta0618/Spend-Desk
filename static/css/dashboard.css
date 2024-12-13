@@ -31,31 +31,15 @@ body {
   cursor: pointer;
 }
 
-.budget-section {
+.budget-section, .expense-form, .expense-list, .chart-container {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-}
-
-.expense-form {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.expense-list {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .chart-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
   height: 400px; /* Adjust height as needed */
 }
 
@@ -68,13 +52,22 @@ select {
   border-radius: 5px;
 }
 
-.submit-btn {
+.submit-btn, .edit-btn, .delete-btn {
   background-color: #28a745;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-btn {
+  background-color: #007bff; /* Blue for edit */
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Red for delete */
 }
 
 .expense-item {
@@ -96,6 +89,16 @@ select {
 
   .chart-container {
     height: 300px;
+  }
+
+  .expense-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn, .edit-btn, .delete-btn {
+    width: 100%;
+    margin: 5px 0;
   }
 }
 

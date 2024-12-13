@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -11,6 +11,7 @@ from .models import Budget, Expense
 from django.db.models import Sum
 import random
 from datetime import datetime
+# ===============================================================================
 # Create your views here.
 # ============================Home Page=========================================
 def home_page(request):
@@ -107,7 +108,7 @@ def otp_fill(request):
             return render(request, 'otp_fill.html', {'error': error})
     return render(request, 'otp_fill.html')
 # =================================================================================
-# ============================Password Reset Page=========================================
+# ============================Password Reset Page==================================
 def password_reset(request):
     if request.method == 'POST':
         new_password = request.POST.get('new_password')
@@ -158,12 +159,8 @@ def dashboard(request):
         'amounts': amounts,
         'messages': messages.get_messages(request)
     })
-
-
-
-
-
-
+# ==================================================================================
+# ============================= Budget Page=========================================
 @login_required(login_url='login')
 def set_budget(request):
     if request.method == 'POST':
@@ -180,9 +177,8 @@ def set_budget(request):
         return redirect('dashboard')  # Redirect to the dashboard after setting the budget
 
     return redirect('dashboard')  # Redirect if not a POST request
-
-
-
+# ==================================================================================
+# ============================= Add Expense Page====================================
 @login_required(login_url='login')
 def add_expense(request):
     if request.method == 'POST':
@@ -198,8 +194,30 @@ def add_expense(request):
             amount=amount,
             category=category
         )
-
         messages.success(request, 'Expense added successfully!')
         return redirect('dashboard')  # Redirect to the dashboard after adding the expense
-
     return redirect('dashboard')  # Redirect if not a POST request
+# ==================================================================================
+# ============================= Edit Expense Page===================================
+@login_required(login_url='login')
+def edit_expense(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id, user=request.user)
+    if request.method == 'POST':
+        expense.description = request.POST.get('description')
+        expense.amount = request.POST.get('amount')
+        expense.category = request.POST.get('category')
+        expense.save()
+        messages.success(request, 'Expense updated successfully!')
+        return redirect('dashboard')
+    return redirect('dashboard')  # Redirect if not a POST request
+# ==================================================================================
+# ============================= Delete Expense Page=================================
+@login_required(login_url='login')
+def delete_expense(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id, user=request.user)
+    if request.method == 'POST':
+        expense.delete()
+        messages.success(request, 'Expense deleted successfully!')
+        return redirect('dashboard')
+    return redirect('dashboard')  # Redirect if not a POST request
+# ==================================================================================
