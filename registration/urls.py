@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1 import views
-
+from django.contrib.auth.views import LogoutView
 
 
 
@@ -25,9 +25,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.sign_up_page, name='signup'),                                # SignUpPage to sign_up_page
     path('login/', views.login_page, name='login'),                             # LoginPage to login_page
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),                       # LogoutPage to logout
     path('home/', views.home_page, name='home'),                                # HomePage to home_page
     path('forgot_password/', views.forgot_password, name='forgot_password'),    # ForgotPassword to forgot_password
     path('otp_fill/', views.otp_fill, name='otp_fill'),                         # OTP_Fill to otp_fill
     path('password_reset/', views.password_reset, name='password_reset'),       # PasswordReset 
+    path('dashboard/', views.dashboard, name='dashboard'),                       # Dashboard to dashboard
+    path('set_budget/', views.set_budget, name='set_budget'),         # SetBudget to set_budget
 ]
 
