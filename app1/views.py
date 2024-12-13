@@ -129,3 +129,21 @@ def password_reset(request):
     return render(request, 'password_reset.html')
 # ===================================================================================
 # ============================Dashboard Page=========================================
+@login_required(login_url='login')
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
+
+
+
+
+def set_budget(request):
+    if request.method == 'POST':
+        budget = request.POST.get('monthly_budget')
+        # user = User.objects.get(username=request.user)
+        # user.budget.monthly_budget = budget
+        # user.budget.save()
+        # return redirect('dashboard')
+        print(budget)
+    return redirect('dashboard')
