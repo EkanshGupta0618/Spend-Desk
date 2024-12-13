@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker Dashboard</title>
+    <title>Expense Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/static/css/dashboard.css">
     <script src="/static/js/dashboard.js"></script>
-    
 </head>
 
 <body>
-    <!-- Logout Button -->
     <div class="container">
         <div class="header">
             <h1>Expense Tracker</h1>
@@ -21,33 +19,56 @@
                 <button type="submit" class="logout-btn">Logout</button>
             </form>
         </div>
-    <div class="content">
-        <div class="dashboard-grid">
-            <div class="card">
-                <h2>Total Expenses</h2>
-                <h3>₹{{ total_expenses }}</h3>
+        <!-- Display messages -->
+        <div class="messages">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
             </div>
-            <div class="card">
-                <h2>Monthly Budget</h2>
-                <h3>₹{{ monthly_budget }}</h3>
-            </div>
-            <div class="card">
-                <h2>Remaining Budget</h2>
-                <h3>₹{{ remaining_budget }}</h3>
-            </div>
-            <div class="card">
-                <h2>Set Monthly Budget</h2>
-                <form class="budget-form" method="POST" action="{% url 'set_budget' %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="monthly_budget">Monthly Budget (₹)</label>
-                        <input type="number" id="monthly_budget" name="monthly_budget" value="{{ monthly_budget }}"
-                            required>
-                    </div>
-                    <button type="submit" class="submit-btn">Update Budget</button>
-                </form>
-            </div>
+            {% endif %}
         </div>
+
+
+        <div class="budget-section">
+            <h2>Monthly Budget</h2>
+            <form action="{% url 'set_budget' %}" method="POST">
+                {% csrf_token %}
+                <input type="number" name="monthly_budget" placeholder="Enter your monthly budget" required>
+                <button type="submit" class="submit-btn">Set Budget</button>
+            </form>
+            <p>Current Budget: Rs. <span id="current-budget">{{ budget }}</span></p>
+            <p>Remaining: Rs. <span id="remaining">{{ remaining }}</span></p>
+        </div>
+        <div class="expense-form">
+            <h2>Add Expense</h2>
+            <form action="{% url 'add_expense' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="description" placeholder="Enter text only" required pattern="[a-zA-Z\s]+">
+                <input type="number" name="amount" placeholder="Amount" required>
+                <select name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="others">Others</option>
+                </select>
+                <button type="submit" class="submit-btn">Add Expense</button>
+            </form>
+        </div>
+        <div class="expense-list">
+            <h2>Recent Expenses</h2>
+            {% for expense in expenses %}
+            <div class="expense-item">
+                <span>{{ expense.description }}</span>
+                <span> {{ expense.category }}</span>
+                <span>Rs. {{ expense.amount }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 
 </html>

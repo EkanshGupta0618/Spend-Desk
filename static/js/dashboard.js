@@ -1,15 +1,11 @@
-// Get expense data from Django context
-const expenseData = JSON.parse("{{ expense_data|escapejs }}");
-
-// Create pie chart
 const ctx = document.getElementById("expenseChart").getContext("2d");
-new Chart(ctx, {
+const expenseChart = new Chart(ctx, {
   type: "pie",
   data: {
-    labels: Object.keys(expenseData),
+    labels: categories, // Pass categories to the chart
     datasets: [
       {
-        data: Object.values(expenseData),
+        data: amounts, // Pass amounts to the chart
         backgroundColor: [
           "#FF6384",
           "#36A2EB",
@@ -22,21 +18,10 @@ new Chart(ctx, {
   },
   options: {
     responsive: true,
-    plugins: {
-      legend: {
-        position: "bottom",
-      },
+    maintainAspectRatio: false,
+    title: {
+      display: true,
+      text: "Expense Distribution by Category",
     },
   },
 });
-
-// Form validation
-document
-  .querySelector(".expense-form")
-  .addEventListener("submit", function (e) {
-    const amount = document.getElementById("amount").value;
-    if (amount <= 0) {
-      e.preventDefault();
-      alert("Amount must be greater than 0");
-    }
-  });

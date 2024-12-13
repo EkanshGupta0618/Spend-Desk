@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
+  background-color: #f4f4f4;
 }
 
 .container {
@@ -25,53 +25,56 @@ body {
 .logout-btn {
   background-color: #dc3545;
   color: white;
-  border: none;
   padding: 10px 20px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.card {
+.budget-section {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .expense-form {
-  margin-bottom: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.expense-list {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: 400px; /* Adjust height as needed */
 }
 
 input,
 select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
 .submit-btn {
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
-  border: none;
   padding: 10px 20px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.expense-list {
-  margin-top: 20px;
 }
 
 .expense-item {
@@ -79,4 +82,26 @@ select {
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
+
+.messages {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }

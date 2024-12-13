@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from .models import Budget, Expense
+from django.db.models import Sum
 import random
 from datetime import datetime
 # Create your views here.
@@ -131,19 +133,73 @@ def password_reset(request):
 # ============================Dashboard Page=========================================
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    # Fetch the user's budget
+    budget = Budget.objects.filter(user=request.user).first()
+    current_budget = budget.monthly_budget if budget else 0.0
+
+    # Fetch expenses
+    expenses = Expense.objects.filter(user=request.user)
+
+    # Calculate remaining budget (if needed)
+    total_expenses = sum(exp.amount for exp in expenses)
+    remaining_budget = current_budget - total_expenses
+    # Aggregate expenses by category
+    expense_data = expenses.values('category').annotate(total_amount=Sum('amount'))
+
+    # Prepare data for the chart
+    categories = [data['category'] for data in expense_data]
+    amounts = [data['total_amount'] for data in expense_data]
+
+    return render(request, 'dashboard.html', {
+        'budget': current_budget,
+        'remaining': remaining_budget,
+        'expenses': expenses,
+        'categories': categories,
+        'amounts': amounts,
+        'messages': messages.get_messages(request)
+    })
 
 
 
 
 
 
+@login_required(login_url='login')
 def set_budget(request):
     if request.method == 'POST':
-        budget = request.POST.get('monthly_budget')
-        # user = User.objects.get(username=request.user)
-        # user.budget.monthly_budget = budget
-        # user.budget.save()
-        # return redirect('dashboard')
-        print(budget)
-    return redirect('dashboard')
+        budget_amount = request.POST.get('monthly_budget')
+        
+        # Get or create the user's budget
+        budget, created = Budget.objects.get_or_create(user=request.user)
+        
+        # Update the monthly budget
+        budget.monthly_budget = budget_amount
+        budget.save()
+        
+        messages.success(request, 'Monthly budget set successfully!')
+        return redirect('dashboard')  # Redirect to the dashboard after setting the budget
+
+    return redirect('dashboard')  # Redirect if not a POST request
+
+
+
+@login_required(login_url='login')
+def add_expense(request):
+    if request.method == 'POST':
+        # Get the data from the form
+        description = request.POST.get('description')
+        amount = request.POST.get('amount')
+        category = request.POST.get('category')
+
+        # Create a new Expense object
+        Expense.objects.create(
+            user=request.user,
+            description=description,
+            amount=amount,
+            category=category
+        )
+
+        messages.success(request, 'Expense added successfully!')
+        return redirect('dashboard')  # Redirect to the dashboard after adding the expense
+
+    return redirect('dashboard')  # Redirect if not a POST request
