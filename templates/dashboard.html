@@ -65,31 +65,26 @@
                 <span>{{ expense.description }}</span>
                 <span> {{ expense.category }}</span>
                 <span>Rs. {{ expense.amount }}</span>
-
+                
                 <!-- Edit Form -->
                 <form action="{% url 'edit_expense' expense.id %}" method="POST" style="display:inline;">
                     {% csrf_token %}
                     <input type="text" name="description" value="{{ expense.description }}" required>
                     <input type="number" name="amount" value="{{ expense.amount }}" required>
                     <select name="category" required>
-                        <option value="food" {% if expense.category|lower=='food' %}selected{% endif %}>Food</option>
-                        <option value="transport" {% if expense.category|lower=='transport' %}selected{% endif %}>
-                            Transport</option>
-                        <option value="utilities" {% if expense.category|lower=='utilities' %}selected{% endif %}>
-                            Utilities</option>
-                        <option value="entertainment" {% if expense.category|lower=='entertainment' %}selected{% endif
-                            %}>Entertainment</option>
-                        <option value="others" {% if expense.category|lower=='others' %}selected{% endif %}>Others
-                        </option>
+                        <option value="food" {% if expense.category|lower == 'food' %}selected{% endif %}>Food</option>
+                        <option value="transport" {% if expense.category|lower == 'transport' %}selected{% endif %}>Transport</option>
+                        <option value="utilities" {% if expense.category|lower == 'utilities' %}selected{% endif %}>Utilities</option>
+                        <option value="entertainment" {% if expense.category|lower == 'entertainment' %}selected{% endif %}>Entertainment</option>
+                        <option value="others" {% if expense.category|lower == 'others' %}selected{% endif %}>Others</option>
                     </select>
                     <button type="submit" class="edit-btn">Update</button>
                 </form>
-
+        
                 <!-- Delete Form -->
                 <form action="{% url 'delete_expense' expense.id %}" method="POST" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" class="delete-btn"
-                        onclick="return confirm('Are you sure you want to delete this expense?');">Delete</button>
+                    <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this expense?');">Delete</button>
                 </form>
             </div>
             {% endfor %}
