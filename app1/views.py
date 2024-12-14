@@ -182,20 +182,26 @@ def set_budget(request):
 @login_required(login_url='login')
 def add_expense(request):
     if request.method == 'POST':
-        # Get the data from the form
-        description = request.POST.get('description')
-        amount = request.POST.get('amount')
-        category = request.POST.get('category')
-
-        # Create a new Expense object
-        Expense.objects.create(
-            user=request.user,
-            description=description,
-            amount=amount,
-            category=category
-        )
-        messages.success(request, 'Expense added successfully!')
-        return redirect('dashboard')  # Redirect to the dashboard after adding the expense
+        expense_id = request.POST.get('expense_id')
+        if expense_id:  # If expense_id is present, update the expense
+            expense = get_object_or_404(Expense, id=expense_id, user=request.user)
+            expense.description = request.POST.get('description')
+            expense.amount = request.POST.get('amount')
+            expense.category = request.POST.get('category')
+            expense.save()
+            messages.success(request, 'Expense updated successfully!')
+        else:  # Otherwise, create a new expense
+            description = request.POST.get('description')
+            amount = request.POST.get('amount')
+            category = request.POST.get('category')
+            Expense.objects.create(
+                user=request.user,
+                description=description,
+                amount=amount,
+                category=category
+            )
+            messages.success(request, 'Expense added successfully!')
+        return redirect('dashboard')  # Redirect to the dashboard after adding/updating the expense
     return redirect('dashboard')  # Redirect if not a POST request
 # ==================================================================================
 # ============================= Edit Expense Page===================================

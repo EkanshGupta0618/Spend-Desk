@@ -5,8 +5,9 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Light background */
+  color: #333; /* Dark text color */
 }
 
 .container {
@@ -20,15 +21,25 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  background-color: #4a90e2; /* Blue background for header */
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .logout-btn {
-  background-color: #dc3545;
+  background-color: #e94e77; /* Pink background */
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #d43f6b; /* Darker pink on hover */
 }
 
 .budget-section, .expense-form, .expense-list, .chart-container {
@@ -36,7 +47,13 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.budget-section:hover, .expense-form:hover, .expense-list:hover, .chart-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .chart-container {
@@ -50,24 +67,43 @@ select {
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2; /* Blue border on focus */
 }
 
 .submit-btn, .edit-btn, .delete-btn {
-  background-color: #28a745;
+  background-color: #5cb85c; /* Green for buttons */
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #4cae4c; /* Darker green on hover */
 }
 
 .edit-btn {
-  background-color: #007bff; /* Blue for edit */
+  background-color: #f39c12; /* Orange for edit */
+}
+
+.edit-btn:hover {
+  background-color: #e67e22; /* Darker orange on hover */
 }
 
 .delete-btn {
-  background-color: #dc3545; /* Red for delete */
+  background-color: #e74c3c; /* Red for delete */
+}
+
+.delete-btn:hover {
+  background-color: #c0392b; /* Darker red on hover */
 }
 
 .expense-item {
@@ -75,6 +111,11 @@ select {
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.expense-item:hover {
+  background-color: #f1f1f1; /* Light gray on hover */
 }
 
 @media (max-width: 768px) {
@@ -103,8 +144,111 @@ select {
 }
 
 .messages {
-  color: red;
+  color: #e74c3c; /* Red for messages */
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Ensures borders are collapsed */
+  margin-top: 20px; /* Adds space above the table */
+}
+
+th, td {
+  border: 1px solid #ddd ; /* Adds border to table cells */
+  padding: 10px; /* Adds padding inside cells */
+  text-align: left; /* Aligns text to the left */
+}
+
+th {
+  background-color: #4a90e2; /* Blue background for header */
+  color: white; /* White text color for header */
+  font-weight: bold; /* Makes header text bold */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Zebra striping for even rows */
+}
+
+tr:hover {
+  background-color: #e2e6ea; /* Highlight row on hover */
+}
+
+.budget-display {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0; /* Adds margin for spacing */
+  padding: 15px;
+  background-color: #d1e7dd; /* Light green background for budget display */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.current-budget, .remaining-budget {
+  flex: 1; /* Equal space for both sections */
+  padding: 10px;
+  text-align: center; /* Center text */
+  border: 1px solid #ccc; /* Border for separation */
+  border-radius: 5px;
+}
+
+.current-budget {
+  background-color: #cfe2f3; /* Light blue for current budget */
+}
+
+.remaining-budget {
+  background-color: #f9cb9c; /* Light orange for remaining budget */
+}
+
+@media (max-width: 480px) {
+  th, td {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logout-btn {
+    width: 100%; /* Full width for logout button */
+    margin-top: 10px; /* Space above button */
+  }
+
+  .budget-display {
+    flex-direction: column; /* Stack budget display on small screens */
+  }
+}
+.card {
+  flex: 1; /* Equal space for both sections */
+  padding: 20px;
+  margin: 0 10px; /* Adds margin between cards */
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+  .budget-display {
+    flex-direction: column; /* Stack budget cards on small screens */
+  }
+
+  .card {
+    margin: 10px 0; /* Margin for stacked cards */
+  }
+}
+
+.chart-container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fff;
 }
