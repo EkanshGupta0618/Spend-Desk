@@ -127,6 +127,14 @@
                 </form>
             </div>
         </div>
+        <div class="chart-container">
+            <h2>Expenses by Category</h2>
+            {% if show_chart %}
+                {{ chart_html|safe }}  <!-- Render the Plotly pie chart -->
+            {% else %}
+                <p>No expenses recorded. Please add some expenses to see the chart.</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 

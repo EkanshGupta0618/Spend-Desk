@@ -189,6 +189,14 @@ tr:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+.chart-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.plotly-graph-div {
+  transition: transform 0.3s ease;  /* Smooth transition for zoom effect */
+}
 
 
 /* Add this media query at the end of your dashboard.css file */
@@ -249,5 +257,40 @@ tr:hover {
   .submit-btn, .edit-btn, .delete-btn {
     width: 100%;
     margin: 5px 0;
+  }
+}
+/* Add this media query at the end of your dashboard.css file */
+@media (max-width: 768px) {
+  .chart-container {
+      margin: 10px; /* Add margin for spacing */
+      padding: 10px; /* Add padding for better appearance */
+      width: 100%; /* Ensure the chart container takes full width */
+  }
+
+  .plotly-graph-div {
+      width: 100% !important; /* Make the chart take full width */
+      height: auto; /* Allow height to adjust automatically */
+  }
+}
+/* Add this media query at the end of your dashboard.css file */
+@media (max-width: 768px) {
+  .expense-list {
+      overflow-x: auto; /* Allow horizontal scrolling if needed */
+      margin: 10px; /* Add margin for spacing */
+  }
+
+  .expense-list table {
+      width: 100%; /* Ensure the table takes full width */
+      border-collapse: collapse; /* Ensures borders are collapsed */
+  }
+
+  .expense-list th, .expense-list td {
+      font-size: 14px; /* Adjust font size for better readability */
+      padding: 8px; /* Reduce padding for smaller screens */
+  }
+
+  .expense-item {
+      flex-direction: column; /* Stack items vertically on small screens */
+      align-items: flex-start; /* Align items to the start */
   }
 }

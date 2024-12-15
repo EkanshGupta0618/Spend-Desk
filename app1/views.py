@@ -7,10 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+import plotly.graph_objects as go
+import plotly.colors
 from .models import Budget, Expense
 from django.db.models import Sum
 import random
+from django.db.models.functions import ExtractMonth
 from datetime import datetime
+import calendar
 # ===============================================================================
 # Create your views here.
 # ============================Home Page=========================================
@@ -132,6 +136,7 @@ def password_reset(request):
     return render(request, 'password_reset.html')
 # ===================================================================================
 # ============================Dashboard Page=========================================
+
 @login_required(login_url='login')
 def dashboard(request):
     # Fetch the user's budget
@@ -141,24 +146,85 @@ def dashboard(request):
     # Fetch expenses
     expenses = Expense.objects.filter(user=request.user)
 
-    # Calculate remaining budget (if needed)
+    # Calculate remaining budget
     total_expenses = sum(exp.amount for exp in expenses)
     remaining_budget = current_budget - total_expenses
+
     # Aggregate expenses by category
     expense_data = expenses.values('category').annotate(total_amount=Sum('amount'))
 
-    # Prepare data for the chart
+    # Prepare data for the pie chart
     categories = [data['category'] for data in expense_data]
     amounts = [data['total_amount'] for data in expense_data]
+    pull = [0.1] * (len(categories) - 1)  # Pull out the first slice
+
+    
+    # Check if there are any expenses to display
+    if not categories or not amounts:
+        categories = ['No Expenses']
+        amounts = [1]  # To show a single slice in the pie chart
+        show_chart = False  # Flag to indicate that the chart should not be shown
+    else:
+        show_chart = True  # Flag to indicate that the chart should be shown
+
+    # Create a Plotly pie chart with enhanced styling
+    fig = go.Figure(data=[go.Pie(
+        labels=categories,
+        values=amounts,
+        hole=0.3,  # For a donut chart
+        textinfo='label+percent',  # Show label and percentage
+        hoverinfo='label+percent+value',  # Show label, percentage, and value on hover
+        hovertemplate='<b>%{label}</b><br>Amount: Rs.%{value}<br>Percentage: %{percent:.2%}<extra></extra>',  # Custom hover template
+        textfont=dict(
+            family="Arial, sans-serif",
+            size=14,
+            color='white'
+        ),
+        marker=dict(
+            colors=plotly.colors.qualitative.Plotly,  # Use Plotly's qualitative colors
+            line=dict(color='#FFFFFF', width=2)  # White border for slices
+        ),
+        pull=pull  # Pull out the first slice
+    )])
+    
+    fig.update_traces(marker=dict(line=dict(width=2, color='white')), selector=dict(type='pie'))  
+    # Update layout for better aesthetics
+    fig.update_layout(
+        hoverlabel=dict(
+            bgcolor="white",
+            font_size=16,
+            font_family="Arial, sans-serif"
+        )
+    )
+
+    # # Update layout for better aesthetics
+    fig.update_layout(
+        annotations=[dict(text='Expenses', x=0.5, y=0.5, font_size=20, showarrow=False)],
+        showlegend=True,
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        ),
+        margin=dict(l=0, r=0, t=50, b=0),  # Remove margins
+        height=500,  # Set height for the chart
+        template='plotly_white'  # Use a clean white template
+    )
+
+    # Generate HTML for the chart
+    chart_html = fig.to_html(full_html=False) if show_chart else None
 
     return render(request, 'dashboard.html', {
         'budget': current_budget,
         'remaining': remaining_budget,
         'expenses': expenses,
-        'categories': categories,
-        'amounts': amounts,
+        'chart_html': chart_html,  # Pass the chart HTML to the template
+        'show_chart': show_chart,  # Pass the flag to the template
         'messages': messages.get_messages(request)
     })
+
 # ==================================================================================
 # ============================= Budget Page=========================================
 @login_required(login_url='login')
