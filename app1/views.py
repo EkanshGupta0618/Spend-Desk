@@ -147,6 +147,11 @@ def dashboard(request):
 
     # Fetch expenses
     expenses = Expense.objects.filter(user=request.user)
+    
+    # Filter expenses by month if a month is selected
+    selected_month = request.GET.get('month')
+    if selected_month:
+        expenses = expenses.filter(date__month=selected_month)
 
     # Calculate remaining budget
     total_expenses = sum(exp.amount for exp in expenses)
@@ -220,6 +225,8 @@ def dashboard(request):
 
     # Generate HTML for the chart
     chart_html = fig.to_html(full_html=False) if show_chart else None
+    # Create a list of months for the dropdown
+    months = [(i, datetime(2021, i, 1).strftime('%B')) for i in range(1, 13)]  # Example year 2021
 
     return render(request, 'dashboard.html', {
         'budget': current_budget,
@@ -228,6 +235,8 @@ def dashboard(request):
         'budget_exceeded': budget_exceeded,  # Pass the flag to the template
         'chart_html': chart_html,  # Pass the chart HTML to the template
         'show_chart': show_chart,  # Pass the flag to the template
+        'selected_month': selected_month,  # Pass the selected month to the template
+        'months': months,
         'messages': messages.get_messages(request)
     })
 # ==================================================================================

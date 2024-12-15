@@ -286,3 +286,56 @@ tr:hover {
     height: auto; /* Maintain aspect ratio */
   }
 }
+/* Media Queries for Responsive Design */
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+  .expense-list table {
+      font-size: 14px; /* Smaller font size for tables */
+      width: 100%; /* Full width for the table */
+      overflow-x: auto; /* Allow horizontal scrolling if needed */
+  }
+
+  .expense-list th,
+  .expense-list td {
+      padding: 8px; /* Reduce padding for smaller screens */
+      display: block; /* Make table cells block elements */
+      width: 100%; /* Full width for each cell */
+      box-sizing: border-box; /* Include padding in width */
+  }
+
+  .expense-list th {
+      display: none; /* Hide table headers on small screens */
+  }
+
+  .expense-item {
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      border-bottom: 1px solid #ddd; /* Keep the border for separation */
+      margin-bottom: 10px; /* Add margin for spacing */
+  }
+
+  .expense-item div {
+      display: flex; /* Use flexbox for item details */
+      justify-content: space-between; /* Space between details */
+      padding: 10px; /* Add padding for better spacing */
+      background-color: #f9f9f9; /* Light background for items */
+      border-radius: 5px; /* Rounded corners */
+  }
+
+  .expense-item:last-child {
+      margin-bottom: 0; /* Remove margin for the last item */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .expense-list table {
+      font-size: 12px; /* Even smaller font size for mobile */
+  }
+
+  .expense-item div {
+      flex-direction: column; /* Stack details vertically */
+      align-items: flex-start; /* Align items to the start */
+  }
+}

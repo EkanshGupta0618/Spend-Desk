@@ -70,6 +70,20 @@
         </div>
 
         <div class="expense-list">
+             <div class="filter-section">
+                <h2>Filter Expenses</h2>
+                <form method="GET">
+                    <select name="month" required>
+                        <option value="">Select Month</option>
+                        {% for month in months %}
+                            <option value="{{ month.0 }}" {% if month.0|stringformat:"d" == selected_month %}selected{% endif %}>
+                                {{ month.1 }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="submit-btn">Filter</button>
+                </form>
+            </div>
             <h2>Recent Expenses</h2>
             <table>
                 <thead>
@@ -102,6 +116,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            
         </div>
 
         <!-- Edit Form (Initially Hidden) -->
