@@ -137,5 +137,5 @@ EMAIL_HOST_USER = 'ekansh78198@gmail.com'  # Your email address
 EMAIL_HOST_PASSWORD = 'jroc llwp peem btgl'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default: use database-backed sessions
-SESSION_COOKIE_AGE = 120  # Set session expiry time (e.g., 2 minutes)
+SESSION_COOKIE_AGE = 1200  # Set session expiry time (e.g., 2 minutes)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Keep session active even after browser is closed

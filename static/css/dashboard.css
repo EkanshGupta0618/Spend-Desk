@@ -56,10 +56,6 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.chart-container {
-  height: 400px; /* Adjust height as needed */
-}
-
 input,
 select {
   width: 100%;
@@ -118,30 +114,6 @@ select:focus {
   background-color: #f1f1f1; /* Light gray on hover */
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  .header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .chart-container {
-    height: 300px;
-  }
-
-  .expense-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .submit-btn, .edit-btn, .delete-btn {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
 
 .messages {
   color: #e74c3c; /* Red for messages */
@@ -202,6 +174,24 @@ tr:hover {
   background-color: #f9cb9c; /* Light orange for remaining budget */
 }
 
+
+.card {
+  flex: 1; /* Equal space for both sections */
+  padding: 20px;
+  margin: 0 10px; /* Adds margin between cards */
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Add this media query at the end of your dashboard.css file */
 @media (max-width: 480px) {
   th, td {
     font-size: 14px; /* Smaller font size for mobile */
@@ -221,20 +211,20 @@ tr:hover {
     flex-direction: column; /* Stack budget display on small screens */
   }
 }
-.card {
-  flex: 1; /* Equal space for both sections */
-  padding: 20px;
-  margin: 0 10px; /* Adds margin between cards */
-  background-color: #ffffff; /* White background for cards */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
 @media (max-width: 768px) {
+  .expense-list table {
+      width: 100%; /* Ensure the table takes full width */
+      overflow-x: auto; /* Allow horizontal scrolling if needed */
+  }
+
+  .expense-list th, .expense-list td {
+      font-size: 14px; /* Adjust font size for better readability */
+      padding: 8px; /* Reduce padding for smaller screens */
+  }
+
+  .expense-list {
+      overflow-x: auto; /* Enable horizontal scrolling for the expense list */
+  }
   .budget-display {
     flex-direction: column; /* Stack budget cards on small screens */
   }
@@ -242,13 +232,22 @@ tr:hover {
   .card {
     margin: 10px 0; /* Margin for stacked cards */
   }
-}
+  .container {
+    padding: 10px;
+  }
 
-.chart-container {
-  width: 80%;
-  margin: auto;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background: #fff;
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .expense-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn, .edit-btn, .delete-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
