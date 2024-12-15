@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f0f4f8; /* Light background */
   color: #333; /* Dark text color */
 }
@@ -42,7 +42,10 @@ body {
   background-color: #d43f6b; /* Darker pink on hover */
 }
 
-.budget-section, .expense-form, .expense-list, .chart-container {
+.budget-section,
+.expense-form,
+.expense-list,
+.chart-container {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -51,7 +54,10 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.budget-section:hover, .expense-form:hover, .expense-list:hover, .chart-container:hover {
+.budget-section:hover,
+.expense-form:hover,
+.expense-list:hover,
+.chart-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -71,7 +77,9 @@ select:focus {
   border-color: #4a90e2; /* Blue border on focus */
 }
 
-.submit-btn, .edit-btn, .delete-btn {
+.submit-btn,
+.edit-btn,
+.delete-btn {
   background-color: #5cb85c; /* Green for buttons */
   color: white;
   padding: 10px 20px;
@@ -114,7 +122,6 @@ select:focus {
   background-color: #f1f1f1; /* Light gray on hover */
 }
 
-
 .messages {
   color: #e74c3c; /* Red for messages */
   font-weight: bold;
@@ -128,8 +135,9 @@ table {
   margin-top: 20px; /* Adds space above the table */
 }
 
-th, td {
-  border: 1px solid #ddd ; /* Adds border to table cells */
+th,
+td {
+  border: 1px solid #ddd; /* Adds border to table cells */
   padding: 10px; /* Adds padding inside cells */
   text-align: left; /* Aligns text to the left */
 }
@@ -158,7 +166,8 @@ tr:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.current-budget, .remaining-budget {
+.current-budget,
+.remaining-budget {
   flex: 1; /* Equal space for both sections */
   padding: 10px;
   text-align: center; /* Center text */
@@ -173,7 +182,6 @@ tr:hover {
 .remaining-budget {
   background-color: #f9cb9c; /* Light orange for remaining budget */
 }
-
 
 .card {
   flex: 1; /* Equal space for both sections */
@@ -190,107 +198,91 @@ tr:hover {
 }
 
 .chart-container {
-  text-align: center;
   margin: 20px;
 }
 
 .plotly-graph-div {
-  transition: transform 0.3s ease;  /* Smooth transition for zoom effect */
+  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
 }
 
+/* Media Queries for Responsive Design */
 
-/* Add this media query at the end of your dashboard.css file */
-@media (max-width: 480px) {
-  th, td {
-    font-size: 14px; /* Smaller font size for mobile */
-  }
-
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .logout-btn {
-    width: 100%; /* Full width for logout button */
-    margin-top: 10px; /* Space above button */
+    flex-direction: column; /* Stack header elements vertically */
+    align-items: center; /* Center align items */
   }
 
   .budget-display {
-    flex-direction: column; /* Stack budget display on small screens */
+    flex-direction: column; /* Stack budget display items vertically */
   }
-}
-@media (max-width: 768px) {
+
+  .current-budget,
+  .remaining-budget {
+    margin: 10px 0; /* Add margin for spacing */
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .expense-form input,
+  .expense-form select {
+    width: 100%; /* Full width for inputs */
+  }
+
   .expense-list table {
-      width: 100%; /* Ensure the table takes full width */
-      overflow-x: auto; /* Allow horizontal scrolling if needed */
+    font-size: 14px; /* Smaller font size for tables */
   }
 
-  .expense-list th, .expense-list td {
-      font-size: 14px; /* Adjust font size for better readability */
-      padding: 8px; /* Reduce padding for smaller screens */
+  .expense-list th,
+  .expense-list td {
+    padding: 8px; /* Reduce padding for smaller screens */
   }
 
-  .expense-list {
-      overflow-x: auto; /* Enable horizontal scrolling for the expense list */
-  }
-  .budget-display {
-    flex-direction: column; /* Stack budget cards on small screens */
-  }
-
-  .card {
-    margin: 10px 0; /* Margin for stacked cards */
-  }
-  .container {
-    padding: 10px;
-  }
-
-  .header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .expense-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .submit-btn, .edit-btn, .delete-btn {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
-/* Add this media query at the end of your dashboard.css file */
-@media (max-width: 768px) {
   .chart-container {
-      margin: 10px; /* Add margin for spacing */
-      padding: 10px; /* Add padding for better appearance */
-      width: 100%; /* Ensure the chart container takes full width */
+    margin: 20px 0; /* Add margin for spacing */
+    padding: 10px; /* Add padding for better spacing */
+    width: 100%; /* Full width for smaller screens */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
   }
 
   .plotly-graph-div {
-      width: 100% !important; /* Make the chart take full width */
-      height: auto; /* Allow height to adjust automatically */
+    width: 100%; /* Ensure the chart takes full width */
+    height: auto; /* Maintain aspect ratio */
   }
 }
-/* Add this media query at the end of your dashboard.css file */
-@media (max-width: 768px) {
-  .expense-list {
-      overflow-x: auto; /* Allow horizontal scrolling if needed */
-      margin: 10px; /* Add margin for spacing */
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem; /* Smaller font size for header */
   }
 
-  .expense-list table {
-      width: 100%; /* Ensure the table takes full width */
-      border-collapse: collapse; /* Ensures borders are collapsed */
+  .budget-section,
+  .expense-form,
+  .expense-list,
+  .chart-container {
+    padding: 15px; /* Reduce padding */
   }
 
-  .expense-list th, .expense-list td {
-      font-size: 14px; /* Adjust font size for better readability */
-      padding: 8px; /* Reduce padding for smaller screens */
+  .submit-btn,
+  .edit-btn,
+  .delete-btn {
+    padding: 8px; /* Smaller button padding */
   }
 
-  .expense-item {
-      flex-direction: column; /* Stack items vertically on small screens */
-      align-items: flex-start; /* Align items to the start */
+  .otp-input input {
+    width: 40px; /* Adjust input width for OTP */
+  }
+
+  .otp-input {
+    gap: 5px; /* Reduce gap between OTP inputs */
+  }
+  .chart-container {
+    margin: 15px 0; /* Reduce margin for mobile */
+    padding: 5px; /* Reduce padding for mobile */
+  }
+  .plotly-graph-div {
+    width: 100%; /* Ensure the chart takes full width */
+    height: auto; /* Maintain aspect ratio */
   }
 }

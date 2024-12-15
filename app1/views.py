@@ -14,6 +14,7 @@ from django.db.models import Sum
 import random
 from django.db.models.functions import ExtractMonth
 from datetime import datetime
+from django.utils import timezone
 import calendar
 # ===============================================================================
 # Create your views here.
@@ -139,6 +140,7 @@ def password_reset(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+
     # Fetch the user's budget
     budget = Budget.objects.filter(user=request.user).first()
     current_budget = budget.monthly_budget if budget else 0.0
@@ -149,7 +151,10 @@ def dashboard(request):
     # Calculate remaining budget
     total_expenses = sum(exp.amount for exp in expenses)
     remaining_budget = current_budget - total_expenses
-
+    
+    # Check if user exceeded the budget
+    budget_exceeded = total_expenses > current_budget
+    
     # Aggregate expenses by category
     expense_data = expenses.values('category').annotate(total_amount=Sum('amount'))
 
@@ -204,7 +209,7 @@ def dashboard(request):
         legend=dict(
             orientation="h",  # Horizontal legend
             yanchor="bottom",
-            y=1.02,
+            y=1,
             xanchor="right",
             x=1
         ),
@@ -220,11 +225,11 @@ def dashboard(request):
         'budget': current_budget,
         'remaining': remaining_budget,
         'expenses': expenses,
+        'budget_exceeded': budget_exceeded,  # Pass the flag to the template
         'chart_html': chart_html,  # Pass the chart HTML to the template
         'show_chart': show_chart,  # Pass the flag to the template
         'messages': messages.get_messages(request)
     })
-
 # ==================================================================================
 # ============================= Budget Page=========================================
 @login_required(login_url='login')
@@ -245,26 +250,31 @@ def set_budget(request):
     return redirect('dashboard')  # Redirect if not a POST request
 # ==================================================================================
 # ============================= Add Expense Page====================================
+# In app1/views.py
 @login_required(login_url='login')
 def add_expense(request):
     if request.method == 'POST':
         expense_id = request.POST.get('expense_id')
+        description = request.POST.get('description')
+        amount = request.POST.get('amount')
+        category = request.POST.get('category')
+        date = request.POST.get('date')  # Get the date from the form
+
         if expense_id:  # If expense_id is present, update the expense
             expense = get_object_or_404(Expense, id=expense_id, user=request.user)
-            expense.description = request.POST.get('description')
-            expense.amount = request.POST.get('amount')
-            expense.category = request.POST.get('category')
+            expense.description = description
+            expense.amount = amount
+            expense.category = category
+            expense.date = date  # Update the date
             expense.save()
             messages.success(request, 'Expense updated successfully!')
         else:  # Otherwise, create a new expense
-            description = request.POST.get('description')
-            amount = request.POST.get('amount')
-            category = request.POST.get('category')
             Expense.objects.create(
                 user=request.user,
                 description=description,
                 amount=amount,
-                category=category
+                category=category,
+                date=date  # Set the date
             )
             messages.success(request, 'Expense added successfully!')
         return redirect('dashboard')  # Redirect to the dashboard after adding/updating the expense
