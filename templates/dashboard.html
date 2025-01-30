@@ -15,12 +15,23 @@
     <div class="container">
         <div class="header">
             <h1>Spend-Desk Dashboard</h1>
-            <form action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
+            <div class="user-btn">
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Settings</button>
+                </form>
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="setting-btn">Logout</button>
+                </form>
+            </div>
         </div>
-
+        
+        <div class="budget-section">
+            <div>
+                <h2>Welcome to your Dashboard {{ user_name }}</h2>
+            </div>
+        </div>
 
         <div class="budget-section">
             <h2>Monthly Budget</h2>
@@ -71,7 +82,7 @@
 
         <div class="expense-list">
              <div class="filter-section">
-                <h2>Filter Expenses</h2>
+                <h2>Filter Expenses by Month</h2>
                 <form method="GET">
                     <select name="month" required>
                         <option value="">Select Month</option>
@@ -84,7 +95,7 @@
                     <button type="submit" class="submit-btn">Filter</button>
                 </form>
             </div>
-            <h2>Recent Expenses</h2>
+            <h2>Expense history: </h2>
             <table>
                 <thead>
                     <tr>

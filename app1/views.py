@@ -34,6 +34,8 @@ def home_page(request):
             fail_silently=False,
         )
         return render(request, 'home.html')
+    return render(request, 'home.html')  # Ensure to return a response for GET requests
+
 # ===============================================================================
 # ============================Login Page=========================================
 #For login page of the website
@@ -140,6 +142,9 @@ def password_reset(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+    
+    #fectch user name
+    user_name = request.user.username
 
     # Fetch the user's budget
     budget = Budget.objects.filter(user=request.user).first()
@@ -229,6 +234,7 @@ def dashboard(request):
     months = [(i, datetime(2021, i, 1).strftime('%B')) for i in range(1, 13)]  # Example year 2021
 
     return render(request, 'dashboard.html', {
+        'user_name': user_name.upper(),
         'budget': current_budget,
         'remaining': remaining_budget,
         'expenses': expenses,
@@ -259,7 +265,6 @@ def set_budget(request):
     return redirect('dashboard')  # Redirect if not a POST request
 # ==================================================================================
 # ============================= Add Expense Page====================================
-# In app1/views.py
 @login_required(login_url='login')
 def add_expense(request):
     if request.method == 'POST':
@@ -280,9 +285,9 @@ def add_expense(request):
         else:  # Otherwise, create a new expense
             Expense.objects.create(
                 user=request.user,
-                description=description,
+                description=description.upper(),
                 amount=amount,
-                category=category,
+                category=category.upper(),
                 date=date  # Set the date
             )
             messages.success(request, 'Expense added successfully!')

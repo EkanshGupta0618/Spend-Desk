@@ -28,9 +28,26 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.user-btn{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-btn {
+  background-color: #56a44f; /* Pink background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .logout-btn {
   background-color: #e94e77; /* Pink background */
   color: white;
+  margin: 0 12px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -133,6 +150,7 @@ table {
   width: 100%;
   border-collapse: collapse; /* Ensures borders are collapsed */
   margin-top: 20px; /* Adds space above the table */
+  text-transform: capitalize;
 }
 
 th,
@@ -199,10 +217,12 @@ tr:hover {
 
 .chart-container {
   margin: 20px;
+  text-transform: capitalize;
 }
 
 .plotly-graph-div {
   transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+  text-transform: capitalize;
 }
 
 /* Media Queries for Responsive Design */

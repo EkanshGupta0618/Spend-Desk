@@ -142,6 +142,5 @@ body {
 .about-us {
   justify-content: center;
   align-items: center;
-  background-color: #a94f1abb;
-  color: white;
+  color: black;
 }
